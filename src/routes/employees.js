@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
+//Llama a caracteristicas de clase database 
 const mysqlConnection = require('../database');
 
+//funcion listar
 router.get('/', (req, res) => {
     mysqlConnection.query('SELECT * FROM employees', (err, rows, fields) => {
         if(!err) {
@@ -13,6 +15,7 @@ router.get('/', (req, res) => {
     });
 });
 
+//funcion buscar por id
 router.get('/:id', (req, res) => {
     const { id } = req.params;
     console.log(id);
@@ -26,6 +29,8 @@ router.get('/:id', (req, res) => {
     });
 });
 
+
+//funcion agregar
 router.post('/', (req, res) => {
     const { id, name, salary } = req.body;
     const query = `
@@ -40,6 +45,7 @@ router.post('/', (req, res) => {
     })
 });
 
+//Funcion editar
 router.put('/:id', (req, res) => {
     const { name, salary } = req.body;
     const { id } = req.params;
@@ -53,6 +59,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
+//funcion eliminar
 router.delete('/:id', (req, res) => {
     const { id } = req.params;
     mysqlConnection.query('DELETE FROM employees WHERE id = ?', [id], (err, rows, fields) => {

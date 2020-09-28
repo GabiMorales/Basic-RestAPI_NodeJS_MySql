@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 
+//Cadena de connexion
 const mysqlConnection = mysql.createConnection({
     host: 'localhost',
     user:'root',
@@ -7,6 +8,7 @@ const mysqlConnection = mysql.createConnection({
     database: 'company'
 });
 
+//envia un mensaje de parte del servidor el cual avisa si esta activo
 mysqlConnection.connect(function (err){
     if(err) {
         console.log(err);
@@ -16,4 +18,5 @@ mysqlConnection.connect(function (err){
     }
 });
 
+//trae datos de otra clase  (employees.js)
 module.exports = mysqlConnection;
